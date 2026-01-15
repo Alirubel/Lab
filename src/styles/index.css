@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white text-gray-900 font-serif;
+}
+
+/* Improve justified text readability */
+.prose p {
+  hyphens: auto;
+  text-align: justify;
+}
+
+/* Academic-quality justified text */
+.justified {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Print / PDF styles ---------- */
+@media print {
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  article {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  pre, blockquote {
+    page-break-inside: avoid;
+  }
+}
+.prose h2 span,
+.prose h3 span {
+  user-select: none;
+}

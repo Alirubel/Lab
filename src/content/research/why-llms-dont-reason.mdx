@@ -1,0 +1,37 @@
+import Cite from "../../components/Cite";
+import References from "../../components/References";
+import Figure from "../../components/Figure";
+import { FigRef } from "../../components/Ref";
+import Algorithm from "../../components/Algorithm";
+
+# Why Large Language Models Do Not Truly Reason (Yet)
+
+## Abstract
+Large language models show impressive surface-level reasoning<Cite id="chollet2019" />.
+
+## Pattern Matching vs Reasoning
+Shortcut learning has been widely documented<Cite id="marcus2020" /><Cite id="wei2022" />.
+
+## Model Architecture
+
+<Figure
+  id="arch"
+  src="/figs/vite.svg"
+  caption="Overall system architecture."
+/>
+
+As shown in <FigRef id="arch" />, the encoder…
+
+<Algorithm id="train" title="Training Procedure">
+for epoch = 1 to N do
+  update model
+end for
+</Algorithm>
+
+<References
+  items={{
+    chollet2019: "Chollet, F., *On the Measure of Intelligence*, arXiv, 2019.",
+    marcus2020: "Marcus, G., *The Next Decade in AI*, MIT Press, 2020.",
+    wei2022: "Wei et al., *Chain-of-Thought Prompting*, NeurIPS, 2022."
+  }}
+/>
