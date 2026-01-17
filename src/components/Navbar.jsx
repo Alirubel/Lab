@@ -1,34 +1,62 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const links = [
+    ["Home", "/"],
+    ["Materials", "/materials"],
+    ["Research", "/research"],
+    ["Evaluation", "/evaluation"],
+    ["Experiments", "/experiments"],
+    ["Tools", "/tools"],
+    ["Publications", "/publications"],
+    ["About", "/about"],
+  ];
+
   return (
-    <nav className="border-b">
-      <div
-        className="
-          max-w-4xl mx-auto
-          px-4 sm:px-6
-          py-3
-          flex flex-wrap
-          gap-x-5 gap-y-2
-          text-xs sm:text-sm
-          text-gray-700
-        "
-      >
-        <Link
-          to="/"
-          className="font-semibold tracking-tight text-gray-900 text-sm sm:text-base"
-        >
-          Home
+    <header className="border-b bg-white">
+      <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
+        <Link to="/" className="font-semibold text-lg">
+          IIT ISM
         </Link>
 
-        <Link to="/materials">Materials</Link>
-        <Link to="/research">Research</Link>
-        <Link to="/evaluation">Evaluation</Link>
-        <Link to="/experiments">Experiments</Link>
-        <Link to="/tools">Tools</Link>
-        <Link to="/publications">Publications</Link>
-        <Link to="/about">About</Link>
+        {/* Desktop menu */}
+        <nav className="hidden md:flex gap-6 text-sm">
+          {links.map(([label, to]) => (
+            <Link key={to} to={to} className="hover:underline">
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile button */}
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          ☰
+        </button>
       </div>
-    </nav>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <nav className="md:hidden border-t bg-white">
+          {links.map(([label, to]) => (
+            <Link
+              key={to}
+              to={to}
+              onClick={() => setOpen(false)}
+              className="block py-3 text-sm text-center rounded-lg border border-gray-200 mx-4 my-0.5 bg-white hover:bg-gray-50 shadow-sm transition"
+
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
+    </header>
   );
 }
