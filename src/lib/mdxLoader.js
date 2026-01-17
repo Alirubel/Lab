@@ -4,6 +4,10 @@
 const mdxModules = import.meta.glob("../content/**/*.mdx", {
   eager: true,
 });
+// const mdxModules = import.meta.glob("/src/content/**/*.mdx", {
+//   eager: true,
+// });
+// console.log("Loaded MDX files:", Object.keys(mdxModules));
 
 /* ===================== HELPERS ===================== */
 
