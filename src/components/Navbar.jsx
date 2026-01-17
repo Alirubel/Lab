@@ -33,12 +33,20 @@ export default function Navbar() {
 
         {/* Mobile button */}
         <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          ☰
-        </button>
+  className="p-3 rounded-md hover:bg-gray-100 transition"
+  aria-label="Open menu"
+>
+  <svg
+    className="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    viewBox="0 0 24 24"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
       </div>
 
       {/* Mobile dropdown */}
