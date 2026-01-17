@@ -1,12 +1,17 @@
+// src/components/Cite.jsx
 import { useCite } from "./Citations";
 
 export default function Cite({ id }) {
-  const { cite } = useCite();
-  const number = cite(id);
+  const ctx = useCite();
 
-  return (
-    <sup className="text-blue-700 cursor-pointer">
-      [{number}]
-    </sup>
-  );
+  // ✅ SAFETY GUARD
+  if (!ctx) {
+    console.warn("Cite used outside CitationProvider");
+    return <sup>[{id}]</sup>;
+  }
+
+  const { cite } = ctx;
+  const num = cite(id);
+
+  return <sup>[{num}]</sup>;
 }

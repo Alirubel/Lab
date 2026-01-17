@@ -1,18 +1,36 @@
-export function getResearchPosts() {
-  const modules = import.meta.glob("../content/research/*.mdx", {
-    eager: true,
-  });
+// src/lib/getResearchPosts.js
 
+const modules = import.meta.glob("../content/research/*.mdx", {
+  eager: true,
+});
+
+/* ---------- helpers ---------- */
+
+function getOrderFromSlug(slug) {
+  // "1.why-llms-dont-reason" → 1
+  const match = slug.match(/^(\d+)[.-]/);
+  return match ? Number(match[1]) : 999;
+}
+
+function cleanSlug(slug) {
+  // "1.why-llms-dont-reason" → "why-llms-dont-reason"
+  return slug.replace(/^\d+[.-]/, "");
+}
+
+/* ---------- main ---------- */
+
+export function getResearchPosts() {
   return Object.entries(modules)
     .map(([path, mod]) => {
-      const slug = path.split("/").pop().replace(".mdx", "");
+      const rawSlug = path.split("/").pop().replace(".mdx", "");
 
       return {
-        slug,
-        title: mod.frontmatter?.title ?? slug,
+        slug: rawSlug, // used in URL
+        cleanSlug: cleanSlug(rawSlug), // optional (for display)
+        title: mod.frontmatter?.title ?? cleanSlug(rawSlug),
         description: mod.frontmatter?.description ?? "",
-        date: mod.frontmatter?.date ?? "",
+        order: getOrderFromSlug(rawSlug),
       };
     })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    .sort((a, b) => a.order - b.order);
 }

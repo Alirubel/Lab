@@ -1,16 +1,15 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function Layout() {
   return (
     <>
       <Navbar />
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
 
+      {/* NORMAL layout wrapper */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 }
